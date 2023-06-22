@@ -103,7 +103,7 @@ class Index extends Controller
         }
 
         foreach ($remoteJss as $remoteJs) {
-            $jss[] = \Url::to('backend/wpjscc/js/index/js/'.$remoteJs->identifier);
+            $jss[] = $remoteJs->link;
         }
 
         foreach ($databaseJss as $databaseJs) {
