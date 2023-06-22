@@ -1,0 +1,10 @@
+name: Jss
+form: $/wpjscc/js/models/js/fields.yaml
+modelClass: Wpjscc\Js\Models\Js
+defaultRedirect: wpjscc/js/jss
+create:
+    redirect: 'wpjscc/js/jss/update/:id'
+    redirectClose: wpjscc/js/jss
+update:
+    redirect: wpjscc/js/jss
+    redirectClose: wpjscc/js/jss

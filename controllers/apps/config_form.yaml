@@ -1,0 +1,10 @@
+name: Apps
+form: $/wpjscc/js/models/jsapp/fields.yaml
+modelClass: Wpjscc\Js\Models\JsApp
+defaultRedirect: wpjscc/js/apps
+create:
+    redirect: 'wpjscc/js/apps/update/:id'
+    redirectClose: wpjscc/js/apps
+update:
+    redirect: wpjscc/js/apps
+    redirectClose: wpjscc/js/apps

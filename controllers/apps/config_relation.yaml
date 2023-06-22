@@ -1,0 +1,12 @@
+
+jss:
+    label: 添加js
+    view:
+        list: $/wpjscc/js/models/js/columns.yaml
+        toolbarButtons: link|unlink
+csss:
+    label: 添加css
+    view:
+        list: $/wpjscc/js/models/css/columns.yaml
+        toolbarButtons: link|unlink
+  

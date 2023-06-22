@@ -1,0 +1,10 @@
+name: Csss
+form: $/wpjscc/js/models/css/fields.yaml
+modelClass: Wpjscc\Js\Models\Css
+defaultRedirect: wpjscc/js/csss
+create:
+    redirect: 'wpjscc/js/csss/update/:id'
+    redirectClose: wpjscc/js/csss
+update:
+    redirect: wpjscc/js/csss
+    redirectClose: wpjscc/js/csss

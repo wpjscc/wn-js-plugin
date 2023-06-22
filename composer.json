@@ -1,0 +1,17 @@
+{
+    "name": "wpjscc/wn-js-plugin",
+    "license": "MIT",
+    "type": "winter-plugin",
+    "authors": [
+        {
+            "name": "wpjscc",
+            "email": "wpjscc@gmail.com"
+        }
+    ],
+    "require": {
+        "wpjscc/wn-clipboard-plugin": "^1.0"
+    },
+    "extra": {
+        "installer-name": "js"
+    }
+}

@@ -1,0 +1,28 @@
+fields:
+    name:
+        label: 名称
+        span: auto
+        type: text
+    tags:
+        label: tag
+        span: auto
+        type: taglist
+        mode: array
+tabs:
+    fields:
+        js:
+            label: js
+            tab: ActionJs
+            size: giant
+            language: javascript
+            span: full
+            type: codeeditor
+        jss:
+            label: 基础js
+            tab: BaseJs
+            type: partial
+        csss:
+            label: 添加css
+            tab: BaseCss
+            type: partial
+                        

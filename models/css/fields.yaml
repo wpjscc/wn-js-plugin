@@ -1,0 +1,42 @@
+fields:
+    name:
+        label: 名称
+        span: auto
+        type: text
+    type:
+        label: 类型
+        span: auto
+        type: dropdown
+        options:
+            local: local
+            remote: remote
+            database: databse
+    link:
+        label: link
+        dependsOn: type
+        span: auto
+        type: text
+        trigger:
+            action: show
+            field: type
+            condition: value[remote] or value[local]
+    asset_path:
+        label: assetPath
+        dependsOn: type
+        span: auto
+        type: text
+        trigger:
+            action: show
+            field: type
+            condition: value[local]
+    content:
+        label: 内容
+        span: full
+        type: codeeditor
+        size: giant
+        language: css
+        dependsOn: type
+        trigger:
+            action: show
+            field: type
+            condition: value[database]

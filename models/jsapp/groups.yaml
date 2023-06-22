@@ -1,0 +1,62 @@
+js_config:
+    name: JS配置
+    fields:
+      type:
+          label: 类型
+          span: auto
+          type: dropdown
+          options:
+              local: local
+              remote: remote
+              database: databse
+      link:
+          label: link
+          dependsOn: type
+          span: auto
+          type: text
+          trigger:
+              action: show
+              field: type
+              condition: value[remote] or value[local]
+      content:
+          label: 内容
+          span: full
+          type: codeeditor
+          size: giant
+          language: javascript
+          dependsOn: type
+          trigger:
+              action: show
+              field: type
+              condition: value[database]
+css_config:
+    name: CSS配置
+    fields:
+      type:
+          label: 类型
+          span: auto
+          type: dropdown
+          options:
+              local: local
+              remote: remote
+              database: databse
+      link:
+          label: link
+          dependsOn: type
+          span: auto
+          type: text
+          trigger:
+              action: show
+              field: type
+              condition: value[remote] or value[local]
+      content:
+          label: 内容
+          span: full
+          type: codeeditor
+          size: giant
+          language: css
+          dependsOn: type
+          trigger:
+              action: show
+              field: type
+              condition: value[database]

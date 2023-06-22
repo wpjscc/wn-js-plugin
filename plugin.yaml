@@ -1,0 +1,34 @@
+plugin:
+    name: 'wpjscc.js::lang.plugin.name'
+    description: 'wpjscc.js::lang.plugin.description'
+    author: wpjscc
+    icon: wn-icon-cloud
+    replaces: {  }
+permissions:
+    wpjscc.jsapp.lists:
+        tab: jsapp管理
+        label: jsapp列表
+navigation:
+    jsapp:
+        label: JsApp
+        url: wpjscc/js/apps
+        icon: icon-cloud
+        permissions:
+            - wpjscc.jsapp.lists
+        sideMenu:
+            jsapp:
+                label: JsApp
+                url: wpjscc/js/apps
+                icon: icon-sitemap
+            jsapp-js:
+                label: Js
+                url: wpjscc/js/jss
+                icon: icon-sitemap
+                permissions:
+                    - wpjscc.jsapp.lists
+            jsapp-css:
+                label: Css
+                url: wpjscc/js/csss
+                icon: icon-sitemap
+                permissions:
+                    - wpjscc.jsapp.lists
