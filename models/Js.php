@@ -28,7 +28,9 @@ class Js extends Model
     /**
      * @var array Attribute names to encode and decode using JSON.
      */
-    public $jsonable = [];
+    public $jsonable = [
+        'tags'
+    ];
 
 
     public function beforeCreate()

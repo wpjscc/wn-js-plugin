@@ -10,8 +10,10 @@ class Index extends Controller
 {
     public $implement = [    ];
 
+    public $suppressLayout = true;
 
     protected $publicActions = [
+        'html',
         'app',
         'index',
         'js',
@@ -23,6 +25,11 @@ class Index extends Controller
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function html($identifier = null)
+    {
+        $this->vars['identifier'] = $identifier;
     }
 
     public function app($identifier = null)

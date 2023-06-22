@@ -5,6 +5,8 @@ columns:
     identifier:
         label: 唯一标识符
         type: text
+    tags:
+        label: tag
     action:
         label: 操作
         type: partial

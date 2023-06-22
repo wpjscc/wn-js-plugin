@@ -3,6 +3,11 @@ fields:
         label: 名称
         span: auto
         type: text
+    tags:
+        label: tag
+        span: auto
+        type: taglist
+        mode: array
     type:
         label: 类型
         span: auto
@@ -11,6 +16,7 @@ fields:
             local: local
             remote: remote
             database: databse
+
     link:
         label: link
         dependsOn: type
