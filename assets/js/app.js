@@ -8,7 +8,7 @@
         return;
     }
     
-   // todo iframe
+   // todo iframe https://interactjs.io/ and https://github.com/davidjbradshaw/iframe-resizer
     let endpoint_html = '{{endpoint_html}}'
     if (endpoint_html.indexOf('{endpoint_html}')!=-1) {
       endpoint_html = '';
