@@ -34,14 +34,21 @@ class Index extends Controller
 
     public function app($identifier = null)
     {
+        $appjs = file_get_contents(plugins_path(
+            'wpjscc/js/assets/js/app.js'
+        ));
+        $appjs = str_replace(
+            '{{endpoint}}',
+            \Url::to('backend/wpjscc/js/index/index/'.$identifier),
+            $appjs
+        );
+        $appjs = str_replace(
+            '{{endpoint_html}}',
+            \Url::to('backend/wpjscc/js/index/html/'.$identifier),
+            $appjs
+        );
         return response(
-            str_replace(
-                '{{endpoint}}',
-                \Url::to('backend/wpjscc/js/index/index/'.$identifier),
-                file_get_contents(plugins_path(
-                    'wpjscc/js/assets/js/app.js'
-                ))
-            ),
+            $appjs,
             200, 
             ['Content-Type' => 'text/javascript']
         );

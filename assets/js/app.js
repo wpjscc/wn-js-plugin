@@ -8,6 +8,22 @@
         return;
     }
     
+   // todo iframe
+    let endpoint_html = '{{endpoint_html}}'
+    if (endpoint_html.indexOf('{endpoint_html}')!=-1) {
+      endpoint_html = '';
+    }
+    if (!endpoint_html) {
+        consolog.info('no endpoint_html')
+        return;
+    }
+    
+    let is_iframe = '{{is_iframe}}'
+    
+    if (is_iframe == 'true') { 
+      return;
+    }
+    
     const xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function () {
