@@ -8,7 +8,6 @@
         return;
     }
     
-   // todo iframe https://interactjs.io/ and https://github.com/davidjbradshaw/iframe-resizer
     
     const xhr = new XMLHttpRequest();
 
