@@ -5,7 +5,7 @@ use Model;
 /**
  * Model
  */
-class JsApp extends Model
+class IframeApp extends Model
 {
     use \Winter\Storm\Database\Traits\Validation;
     
@@ -17,14 +17,14 @@ class JsApp extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'wpjscc_js_apps';
+    public $table = 'wpjscc_js_iframe_apps';
 
     /**
      * @var array Validation rules
      */
     public $rules = [
     ];
-    
+
     /**
      * @var array Attribute names to encode and decode using JSON.
      */
@@ -33,7 +33,6 @@ class JsApp extends Model
     ];
 
     public $morphToMany = [
-
         'jss' => [
             'Wpjscc\Js\Models\Js',
             'table' => 'wpjscc_js_app_jss',
@@ -50,7 +49,6 @@ class JsApp extends Model
             'name' => 'appable'
         ]
     ];
-
 
     public function beforeCreate()
     {

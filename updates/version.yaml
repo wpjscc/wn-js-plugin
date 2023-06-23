@@ -57,3 +57,18 @@
 1.0.20:
     - 'Updated table wpjscc_js_jss'
     - builder_table_update_wpjscc_js_jss_5.php
+1.0.21:
+    - 'Created table wpjscc_js_iframes'
+    - builder_table_create_wpjscc_js_iframes.php
+1.0.22:
+    - 'Updated table wpjscc_js_iframes'
+    - builder_table_update_wpjscc_js_iframes.php
+1.0.23:
+    - 'Updated table wpjscc_js_iframes'
+    - builder_table_update_wpjscc_js_iframe_apps.php
+1.0.24:
+    - 'Updated table wpjscc_js_app_jss'
+    - builder_table_update_wpjscc_js_app_jss_2.php
+1.0.25:
+    - 'Updated table wpjscc_js_app_csss'
+    - builder_table_update_wpjscc_js_app_csss.php

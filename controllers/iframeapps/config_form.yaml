@@ -1,0 +1,10 @@
+name: IframeApps
+form: $/wpjscc/js/models/iframeapp/fields.yaml
+modelClass: Wpjscc\Js\Models\IframeApp
+defaultRedirect: wpjscc/js/iframeapps
+create:
+    redirect: 'wpjscc/js/iframeapps/update/:id'
+    redirectClose: wpjscc/js/iframeapps
+update:
+    redirect: wpjscc/js/iframeapps
+    redirectClose: wpjscc/js/iframeapps

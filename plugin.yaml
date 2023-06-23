@@ -32,3 +32,9 @@ navigation:
                 icon: icon-sitemap
                 permissions:
                     - wpjscc.jsapp.lists
+            jsapp-iframeapp:
+                label: IframeApp
+                url: wpjscc/js/iframeapps
+                icon: icon-sitemap
+                permissions:
+                    - wpjscc.jsapp.lists

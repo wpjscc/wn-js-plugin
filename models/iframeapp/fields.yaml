@@ -8,11 +8,6 @@ fields:
         span: auto
         type: taglist
         mode: array
-    iframe@iframe:
-        label: iframe
-        type: partial
-        span: full
-
 tabs:
     fields:
         js:

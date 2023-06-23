@@ -1,0 +1,58 @@
+
+<?= Form::open(['id' => 'updateForm']) ?>
+
+    <input type="hidden" name="update_record_id" value="<?= $updateRecordId ?>" />
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="popup">&times;</button>
+        <h4 class="modal-title"><?=  '编辑' ?></h4>
+    </div>
+
+    <?php if (!$this->fatalError): ?>
+
+        <div class="modal-body">
+            <?= $this->formRender() ?>
+        </div>
+
+        <div class="modal-footer">
+            <button
+                type="submit"
+                data-request="onUpdate"
+                data-request-data='refresh: true,context:"<?=post('context','')?>",custom_fields:<?= json_encode(post('custom_fields', []))?>'
+                data-hotkey="ctrl+s, cmd+s"
+                data-popup-load-indicator
+                class="btn btn-primary">
+                <?= e(trans('backend::lang.form.save')) ?>
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-default"
+                data-dismiss="popup">
+                <?= e(trans('backend::lang.form.cancel')) ?>
+            </button>
+        </div>
+    
+
+
+    <?php else: ?>
+
+        <div class="modal-body">
+            <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
+        </div>
+        <div class="modal-footer">
+            <button
+                type="button"
+                class="btn btn-default"
+                data-dismiss="popup">
+                <?= e(trans('backend::lang.form.close')) ?>
+            </button>
+        </div>
+
+    <?php endif ?>
+
+    <script>
+
+    </script>
+
+<?= Form::close() ?>

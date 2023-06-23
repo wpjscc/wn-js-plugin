@@ -3,6 +3,7 @@
 use Backend\Classes\Controller;
 use BackendMenu;
 use Wpjscc\Js\Models\JsApp;
+use Wpjscc\Js\Models\IframeApp;
 use Wpjscc\Js\Models\Js;
 use Wpjscc\Js\Models\Css;
 
@@ -14,6 +15,7 @@ class Index extends Controller
 
     protected $publicActions = [
         'html',
+        'iframe',
         'app',
         'index',
         'js',
@@ -27,24 +29,24 @@ class Index extends Controller
         parent::__construct();
     }
 
-    public function html($identifier = null)
+    public function html($identifier, $app = 'JsApp')
     {
-        $this->vars['identifier'] = $identifier;
+        $this->validateApp($app);
+        $query = http_build_query(request()->query());
+
+        $this->vars['url'] = \Url::to('backend/wpjscc/js/index/app/'.$identifier.'/'.$app).'?'.$query;
+
     }
 
-    public function app($identifier = null)
+    public function app($identifier, $app = 'JsApp')
     {
         $appjs = file_get_contents(plugins_path(
             'wpjscc/js/assets/js/app.js'
         ));
+        $query = http_build_query(request()->query());
         $appjs = str_replace(
             '{{endpoint}}',
-            \Url::to('backend/wpjscc/js/index/index/'.$identifier),
-            $appjs
-        );
-        $appjs = str_replace(
-            '{{endpoint_html}}',
-            \Url::to('backend/wpjscc/js/index/html/'.$identifier),
+            \Url::to('backend/wpjscc/js/index/index/'.$identifier.'/'.$app).'?'.$query,
             $appjs
         );
         return response(
@@ -55,14 +57,18 @@ class Index extends Controller
     }
 
 
-    public function index($identifier = null)
+    public function index($identifier, $appType = 'JsApp')
     {
-        $jsApp = JsApp::where('identifier', $identifier)->firstOrFail();
+        $this->validateApp($appType);
+
+        $class = '\Wpjscc\Js\Models\\'.$appType;
+
+        $app = $class::where('identifier', $identifier)->firstOrFail();
 
         return response()->json([
-            'js' => $this->getJssByJsApp($jsApp),
-            'css' => $this->getCsssByJsApp($jsApp),
-            'action' => $this->getActionsByJsApp($jsApp)
+            'js' => $this->getJssByApp($app),
+            'css' => $this->getCsssByApp($app),
+            'action' => $this->getActionsByApp($app, $appType)
         ]);
     }
 
@@ -85,17 +91,30 @@ class Index extends Controller
     }
 
 
-    public function action($identifier = null)
+    public function action($identifier, $app = 'JsApp')
     {
+        $this->validateApp($app);
+
+        $class = '\Wpjscc\Js\Models\\'.$app;
+
+        $js = $class::where('identifier', $identifier)->first()->js ?? '';
+        $js = str_replace('\'{{query}}\'', json_encode(request()->query()), $js);
         return response(
-            JsApp::where('identifier', $identifier)->first()->js ?? '',
+            $js,
             200,
             ['Content-Type' => 'text/javascript']
         );
     }
 
+    protected function validateApp($app)
+    {
+        if (!in_array($app, ['JsApp', 'IframeApp'])) {
+            throw new \Exception('Invalid app type');
+        }
+    }
 
-    protected function getJssByJsApp($jsApp)
+
+    protected function getJssByApp($jsApp)
     {
         $jss = [];
 
@@ -120,7 +139,7 @@ class Index extends Controller
         return $jss;
     }
 
-    protected function getCsssByJsApp($jsApp)
+    protected function getCsssByApp($jsApp)
     {
         $csss = [];
         $localCss = $jsApp->csss->where('type', 'local');
@@ -144,10 +163,12 @@ class Index extends Controller
         return $csss;
     }
 
-    protected function getActionsByJsApp($jsApp)
+    protected function getActionsByApp($jsApp, $appType)
     {
+        $query = http_build_query(request()->query());
+
         return [
-            \Url::to('backend/wpjscc/js/index/action/'.$jsApp->identifier)
+            \Url::to('backend/wpjscc/js/index/action/'.$jsApp->identifier.'/'.$appType. '?'.$query)
         ];
     }
 
