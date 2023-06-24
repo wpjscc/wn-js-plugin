@@ -2,5 +2,14 @@ columns:
     name:
         label: name
         type: text
+    type:
+        label: type
     tags:
         label: tag
+
+    js_action:
+        label: 操作
+        type: partial
+        sortable: false
+        clickable: false
+        searchable: false

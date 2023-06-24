@@ -1,0 +1,14 @@
+
+<?php if ($record->type=='database'):?>
+<a class="btn btn-primary btn-xs" onclick="
+var copy_state = window.copyToClipboard('<?=\Url::to('backend/wpjscc/js/index/js/'.$record->identifier)?>');
+if(copy_state) {
+    $.wn.flashMsg({
+        'text': '复制成功',
+        'class': 'success',
+        'interval': 3
+    })
+}
+">复制JS</a>
+<?php endif?>
+
