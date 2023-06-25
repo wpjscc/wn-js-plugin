@@ -1,15 +1,14 @@
 columns:
-    id:
-        label: id
     name:
-        label: 名称
+        label: name
         type: text
-    identifier:
-        label: 唯一标识符
-        type: text
+    type:
+        label: type
     tags:
         label: tag
-    action:
+    pivot[sort_order]:
+        label: sort_order
+    js_action:
         label: 操作
         type: partial
         sortable: false

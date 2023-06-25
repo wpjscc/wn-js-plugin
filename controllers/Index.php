@@ -117,25 +117,17 @@ class Index extends Controller
     protected function getJssByApp($jsApp)
     {
         $jss = [];
-
-        $localJss = $jsApp->jss->where('type', 'local');
-        $remoteJss = $jsApp->jss->where('type', 'remote');
-        $databaseJss = $jsApp->jss->where('type', 'database'); 
-
-        foreach ($localJss as $localJs) {
-            $jss[] = $this->combineAssets([
-                $localJs->link
-            ], $this->getLocalPath($localJs->assetPath ?: $this->assetPath));
+        foreach($jsApp->jss->sortBy('sort_order') as $js) {
+            if ($js->type == 'local') {
+                $jss[] = $this->combineAssets([
+                    $js->link
+                ], $this->getLocalPath($js->assetPath ?: $this->assetPath));
+            } else if ($js->type == 'remote') {
+                $jss[] = $js->link;
+            } else if ($js->type == 'database') {
+                $jss[] = \Url::to('backend/wpjscc/js/index/js/'.$js->identifier);
+            }
         }
-
-        foreach ($remoteJss as $remoteJs) {
-            $jss[] = $remoteJs->link;
-        }
-
-        foreach ($databaseJss as $databaseJs) {
-            $jss[] = \Url::to('backend/wpjscc/js/index/js/'.$databaseJs->identifier);
-        }
-
         return $jss;
     }
 

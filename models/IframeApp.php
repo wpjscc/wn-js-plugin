@@ -38,7 +38,8 @@ class IframeApp extends Model
             'table' => 'wpjscc_js_app_jss',
             'key' => 'appable_id',
             'otherKey' => 'js_id',
-            'name' => 'appable'
+            'name' => 'appable',
+            'pivot' => ['sort_order']
         ],
 
         'csss' => [

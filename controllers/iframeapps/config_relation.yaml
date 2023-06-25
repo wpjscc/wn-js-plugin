@@ -2,8 +2,18 @@
 jss:
     label: 添加js
     view:
-        list: $/wpjscc/js/models/js/columns.yaml
+        list: $/wpjscc/js/models/js/relation_columns.yaml
+        defaultSort:
+            column: pivot[sort_order]
+            direction: asc
         toolbarButtons: link|unlink
+    pivot:
+        form:
+            fields:
+                pivot[sort_order]:
+                    label: sort_order
+                    span: auto
+                    comment: 越小越先执行
 csss:
     label: 添加css
     view:
