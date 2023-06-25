@@ -66,8 +66,8 @@ class Index extends Controller
         $app = $class::where('identifier', $identifier)->firstOrFail();
 
         return response()->json([
-            'preload_js' => $this->getJssByApp($app->jss->where('is_preload', 1)),
-            'js' => $this->getJssByApp($app->jss->where('is_preload', 0)),
+            'preload_js' => $this->getJssByApp($app->jss->where('pivot.is_preload', 1)),
+            'js' => $this->getJssByApp($app->jss->where('pivot.is_preload', 0)),
             'css' => $this->getCsssByApp($app),
             'action' => $this->getActionsByApp($app, $appType)
         ]);
