@@ -15,8 +15,11 @@
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
-                loadJs(response.js).then(function() {
-                    loadJs(response.action)
+
+                loadJs(response.preload_js).then(function() {
+                    loadJs(response.js).then(function () { 
+                        loadJs(response.action)
+                    })
                 })
                 loadCss(response.css).then(function() {
                     

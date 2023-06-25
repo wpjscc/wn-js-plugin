@@ -6,8 +6,8 @@ columns:
         label: type
     tags:
         label: tag
-    pivot[sort_order]:
-        label: sort_order
+    pivot[is_preload]:
+        label: 是否预先加载
     js_action:
         label: 操作
         type: partial

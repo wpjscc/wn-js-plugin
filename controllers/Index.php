@@ -66,7 +66,8 @@ class Index extends Controller
         $app = $class::where('identifier', $identifier)->firstOrFail();
 
         return response()->json([
-            'js' => $this->getJssByApp($app),
+            'preload_js' => $this->getJssByApp($app->jss->where('is_preload', 1)),
+            'js' => $this->getJssByApp($app->jss->where('is_preload', 0)),
             'css' => $this->getCsssByApp($app),
             'action' => $this->getActionsByApp($app, $appType)
         ]);
@@ -113,11 +114,10 @@ class Index extends Controller
         }
     }
 
-
-    protected function getJssByApp($jsApp)
+    protected function getJssByApp($jssModels)
     {
         $jss = [];
-        foreach($jsApp->jss->sortBy('sort_order') as $js) {
+        foreach($jssModels as $js) {
             if ($js->type == 'local') {
                 $jss[] = $this->combineAssets([
                     $js->link

@@ -3,16 +3,15 @@ jss:
     label: 添加js
     view:
         list: $/wpjscc/js/models/js/relation_columns.yaml
-        defaultSort:
-            column: pivot[sort_order]
-            direction: asc
         toolbarButtons: link|unlink
     pivot:
         form:
             fields:
-                pivot[sort_order]:
-                    label: sort_order
+                pivot[is_preload]:
+                    label: is_preload
+                    type: switch
                     span: auto
+                    comment: 是否预先加载
 csss:
     label: 添加css
     view:

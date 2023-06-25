@@ -40,7 +40,7 @@ class JsApp extends Model
             'key' => 'appable_id',
             'otherKey' => 'js_id',
             'name' => 'appable',
-            'pivot' => ['sort_order']
+            'pivot' => ['is_preload']
         ],
 
         'csss' => [
