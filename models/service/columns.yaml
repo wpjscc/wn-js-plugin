@@ -6,7 +6,10 @@ columns:
         label: type
     tags:
         label: tag
-
+    identifier:
+        label: 唯一标识符
+        type: text
+        searchable: true
     js_action:
         label: 操作
         type: partial
