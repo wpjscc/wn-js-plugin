@@ -90,3 +90,9 @@
 1.0.31:
     - 'Updated table wpjscc_js_iframe_apps'
     - builder_table_update_wpjscc_js_iframe_apps_2.php
+1.0.32:
+    - 'Updated table wpjscc_js_jss'
+    - builder_table_update_wpjscc_js_jss_6.php
+1.0.33:
+    - 'Updated table wpjscc_js_jss'
+    - builder_table_update_wpjscc_js_jss_7.php

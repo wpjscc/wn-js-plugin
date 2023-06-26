@@ -4,6 +4,8 @@ columns:
         type: text
     type:
         label: type
+    is_head:
+        label: is_head
     identifier:
         label: 唯一标识符
         type: text

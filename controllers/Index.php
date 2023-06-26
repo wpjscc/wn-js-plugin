@@ -48,8 +48,9 @@ class Index extends Controller
         $query = http_build_query(request()->query());
 
         $this->vars['url'] = \Url::to('backend/wpjscc/js/index/app/'.$identifier.'/'.$app).'?'.$query;
-
         $this->vars['html'] = $this->jsService->getAppHtml($identifier, $app);
+        $this->vars = array_merge($this->vars, $this->jsService->getJssAndCssTags($identifier, $app));
+        
 
     }
 

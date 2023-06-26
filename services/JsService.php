@@ -30,15 +30,26 @@ class JsService
             throw new \Exception("Cannot create zip file");
         }
 
-        $script = '';
+        $headScript = '';
+        $bodyScript = '';
         foreach ($dependencies['preload_js'] as $js) {
             $zip->addFromString('preload/'.$js['name'], file_get_contents($js['url']));
-            $script .= '<script src="preload/'.$js['name'].'"></script>'.PHP_EOL;
+            if ($js['is_head']) {
+                $headScript .= '<script src="preload/'.$js['name'].'"></script>'.PHP_EOL;
+            }
+            else {
+                $bodyScript .= '<script src="preload/'.$js['name'].'"></script>'.PHP_EOL;
+            }
         }
 
         foreach ($dependencies['js'] as $js) {
             $zip->addFromString('js/'.$js['name'], file_get_contents($js['url']));
-            $script .= '<script src="js/'.$js['name'].'"></script>'.PHP_EOL;
+            if ($js['is_head']) {
+                $headScript .= '<script src="js/'.$js['name'].'"></script>'.PHP_EOL;
+            }
+            else {
+                $bodyScript .= '<script src="js/'.$js['name'].'"></script>'.PHP_EOL;
+            }
         }
 
         $styles = '';
@@ -49,14 +60,14 @@ class JsService
 
         foreach ($dependencies['action'] as $action) {
             $zip->addFromString('action/'.$action['name'], file_get_contents($action['url']));
-            $script .= '<script src="action/'.$action['name'].'"></script>'.PHP_EOL;
+            $bodyScript .= '<script src="action/'.$action['name'].'"></script>'.PHP_EOL;
         }
 
-        $html = \Twig::parse(file_get_contents(plugins_path('wpjscc/js/assets/js/index.html')), [
-            'html' => $this->getAppHtml($identifier, $app),
-            'scripts' => $script,
-            'styles' => $styles
-        ]);
+        $data['html'] = $this->getAppHtml($identifier, $app);
+        $data['headScript'] = $headScript;
+        $data['bodyScript'] = $bodyScript;
+        $data['styles'] = $styles;
+        $html = \Twig::parse(file_get_contents(plugins_path('wpjscc/js/assets/js/index.html')), $data);
 
         $zip->addFromString('index.html', $html);
 
@@ -65,6 +76,44 @@ class JsService
 
         return $zipPath;
 
+    }
+
+    public function getJssAndCssTags($identifier, $appType = 'JsApp')
+    {
+        $dependencies = $this->getDependencies($identifier, $appType);
+
+        $headScript = '';
+        $bodyScript = '';
+        foreach ($dependencies['preload_js'] as $js) {
+            if ($js['is_head']) {
+                $headScript .= '<script src="'.$js['url'].'"></script>'.PHP_EOL;
+            } else {
+                $bodyScript .= '<script src="'.$js['url'].'"></script>'.PHP_EOL;
+            }
+        }
+
+        foreach ($dependencies['js'] as $js) {
+            if ($js['is_head']) {
+                $headScript .= '<script src="'.$js['url'].'"></script>'.PHP_EOL;
+            } else {
+                $bodyScript .= '<script src="'.$js['url'].'"></script>'.PHP_EOL;
+            }
+        }
+
+        $styles = '';
+        foreach ($dependencies['css'] as $css) {
+            $styles .= '<link rel="stylesheet" href="'.$css['url'].'">'.PHP_EOL;
+        }
+
+        foreach ($dependencies['action'] as $action) {
+            $bodyScript .= '<script src="'.$action['url'].'"></script>'.PHP_EOL;
+        }
+
+        return [
+            'headScript' => $headScript,
+            'bodyScript' => $bodyScript,
+            'styles' => $styles
+        ];
     }
 
 
@@ -95,6 +144,7 @@ class JsService
         foreach($jssModels as $js) {
             if ($js->type == 'local') {
                 $jss[] = [
+                    'is_head' => $js->is_head,
                     'name' => $js->name,
                     'url' => $this->combineAssets([
                         $js->link
@@ -102,6 +152,7 @@ class JsService
                 ];
             } else if ($js->type == 'remote') {
                 $jss[] = [
+                    'is_head' => $js->is_head,
                     'name' => $js->name,
                     'url' => $js->link
                 ];
@@ -109,6 +160,7 @@ class JsService
                 $classes = explode('\\', get_class($js));
                 $type = array_pop($classes);
                 $jss[] = [
+                    'is_head' => $js->is_head,
                     'name' => $js->name,
                     'url' => \Url::to('backend/wpjscc/js/index/js/'.$js->identifier.'/'.$type)
                 ];

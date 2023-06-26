@@ -8,6 +8,11 @@ fields:
         span: auto
         type: taglist
         mode: array
+    is_head:
+        label: 是否在head中
+        span: auto
+        type: switch
+        default: 0
     type:
         label: 类型
         span: auto
