@@ -49,6 +49,8 @@ class Index extends Controller
 
         $this->vars['url'] = \Url::to('backend/wpjscc/js/index/app/'.$identifier.'/'.$app).'?'.$query;
 
+        $this->vars['html'] = $this->jsService->getAppHtml($identifier, $app);
+
     }
 
     public function app($identifier, $app = 'JsApp')

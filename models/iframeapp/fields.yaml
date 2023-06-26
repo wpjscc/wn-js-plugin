@@ -17,6 +17,13 @@ tabs:
             language: javascript
             span: full
             type: codeeditor
+        html:
+            label: html
+            tab: ActionJs
+            size: giant
+            language: html
+            span: full
+            type: codeeditor
         services:
             label: service
             tab: Service

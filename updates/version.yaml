@@ -84,3 +84,9 @@
 1.0.29:
     - 'Created table wpjscc_js_app_services'
     - builder_table_create_wpjscc_js_app_services.php
+1.0.30:
+    - 'Updated table wpjscc_js_apps'
+    - builder_table_update_wpjscc_js_apps_6.php
+1.0.31:
+    - 'Updated table wpjscc_js_iframe_apps'
+    - builder_table_update_wpjscc_js_iframe_apps_2.php

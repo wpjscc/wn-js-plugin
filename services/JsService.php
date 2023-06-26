@@ -53,6 +53,7 @@ class JsService
         }
 
         $html = \Twig::parse(file_get_contents(plugins_path('wpjscc/js/assets/js/index.html')), [
+            'html' => $this->getAppHtml($identifier, $app),
             'scripts' => $script,
             'styles' => $styles
         ]);
@@ -187,6 +188,14 @@ class JsService
         $js = str_replace('\'{{query}}\'', json_encode(request()->query()), $js);
 
         return $js;
+    }
+    public function getAppHtml($identifier, $app = 'JsApp')
+    {
+        $this->validateApp($app);
+
+        $class = '\Wpjscc\Js\Models\\'.$app;
+
+        return $class::where('identifier', $identifier)->first()->html ?? '';
     }
 
 
