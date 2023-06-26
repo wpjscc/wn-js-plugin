@@ -22,6 +22,10 @@ tabs:
             language: javascript
             span: full
             type: codeeditor
+        services:
+            label: service
+            tab: Service
+            type: partial
         jss:
             label: 基础js
             tab: BaseJs

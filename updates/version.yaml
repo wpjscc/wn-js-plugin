@@ -78,3 +78,9 @@
 1.0.27:
     - 'Updated table wpjscc_js_app_jss'
     - builder_table_update_wpjscc_js_app_jss_4.php
+1.0.28:
+    - 'Created table wpjscc_js_services'
+    - builder_table_create_wpjscc_js_services.php
+1.0.29:
+    - 'Created table wpjscc_js_app_services'
+    - builder_table_create_wpjscc_js_app_services.php

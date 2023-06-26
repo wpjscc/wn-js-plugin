@@ -20,6 +20,12 @@ navigation:
                 label: JsApp
                 url: wpjscc/js/apps
                 icon: icon-sitemap
+            jsapp-service:
+                label: Service
+                url: wpjscc/js/services
+                icon: icon-sitemap
+                permissions:
+                    - wpjscc.jsapp.lists
             jsapp-js:
                 label: Js
                 url: wpjscc/js/jss

@@ -34,6 +34,13 @@ class JsApp extends Model
 
     public $morphToMany = [
 
+        'services' => [
+            'Wpjscc\Js\Models\Service',
+            'table' => 'wpjscc_js_app_services',
+            'key' => 'appable_id',
+            'otherKey' => 'service_id',
+            'name' => 'appable',
+        ],
         'jss' => [
             'Wpjscc\Js\Models\Js',
             'table' => 'wpjscc_js_app_jss',

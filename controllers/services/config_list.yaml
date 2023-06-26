@@ -1,0 +1,15 @@
+list: $/wpjscc/js/models/service/columns.yaml
+modelClass: Wpjscc\Js\Models\Service
+title: Jss
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+defaultSort:
+    column: created_at
+    direction: desc
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'wpjscc/js/services/update/:id'

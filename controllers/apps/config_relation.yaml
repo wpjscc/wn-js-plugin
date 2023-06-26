@@ -1,4 +1,9 @@
 
+services:
+    label: 添加service
+    view:
+        list: $/wpjscc/js/models/service/relation_columns.yaml
+        toolbarButtons: link|unlink
 jss:
     label: 添加js
     view:

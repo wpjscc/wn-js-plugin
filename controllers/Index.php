@@ -65,18 +65,25 @@ class Index extends Controller
 
         $app = $class::where('identifier', $identifier)->firstOrFail();
 
+        $serviceJss = $this->getJss($app->services);
+
         return response()->json([
-            'preload_js' => $this->getJssByApp($app->jss->where('pivot.is_preload', 1)),
-            'js' => $this->getJssByApp($app->jss->where('pivot.is_preload', 0)),
+            'preload_js' => $this->getJss($app->jss->where('pivot.is_preload', 1)),
+            'js' => array_merge($this->getJss($app->jss->where('pivot.is_preload', 0)), $serviceJss),
             'css' => $this->getCsssByApp($app),
             'action' => $this->getActionsByApp($app, $appType)
         ]);
     }
 
-    public function js($identifier = null)
+    public function js($identifier = null, $type = 'Js')
     {
+        $this->validateJsType($type);
+
+        $class = '\Wpjscc\Js\Models\\'.$type;
+
+
         return response(
-            Js::where('identifier', $identifier)->first()->content ?? '',
+            $class::where('identifier', $identifier)->first()->content ?? '',
             200,
             ['Content-Type' => 'text/javascript']
         );
@@ -113,8 +120,14 @@ class Index extends Controller
             throw new \Exception('Invalid app type');
         }
     }
+    protected function validateJsType($type)
+    {
+        if (!in_array($type, ['Js', 'Service'])) {
+            throw new \Exception('Invalid js type');
+        }
+    }
 
-    protected function getJssByApp($jssModels)
+    protected function getJss($jssModels)
     {
         $jss = [];
         foreach($jssModels as $js) {
@@ -125,7 +138,9 @@ class Index extends Controller
             } else if ($js->type == 'remote') {
                 $jss[] = $js->link;
             } else if ($js->type == 'database') {
-                $jss[] = \Url::to('backend/wpjscc/js/index/js/'.$js->identifier);
+                $classes = explode('\\', get_class($js));
+                $type = array_pop($classes);
+                $jss[] = \Url::to('backend/wpjscc/js/index/js/'.$js->identifier.'/'. $type);
             }
         }
         return $jss;
