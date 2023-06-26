@@ -33,22 +33,24 @@ class JsService
         $headScript = '';
         $bodyScript = '';
         foreach ($dependencies['preload_js'] as $js) {
+            $attrs = implode(' ', $js['attrs']);
             $zip->addFromString('preload/'.$js['name'], file_get_contents($js['url']));
             if ($js['is_head']) {
-                $headScript .= '<script src="preload/'.$js['name'].'"></script>'.PHP_EOL;
+                $headScript .= '<script src="preload/'.$js['name'].'" '.$attrs.'></script>'.PHP_EOL;
             }
             else {
-                $bodyScript .= '<script src="preload/'.$js['name'].'"></script>'.PHP_EOL;
+                $bodyScript .= '<script src="preload/'.$js['name'].'" '.$attrs.'></script>'.PHP_EOL;
             }
         }
 
         foreach ($dependencies['js'] as $js) {
+            $attrs = implode(' ', $js['attrs']);
             $zip->addFromString('js/'.$js['name'], file_get_contents($js['url']));
             if ($js['is_head']) {
-                $headScript .= '<script src="js/'.$js['name'].'"></script>'.PHP_EOL;
+                $headScript .= '<script src="js/'.$js['name'].'" '.$attrs.'></script>'.PHP_EOL;
             }
             else {
-                $bodyScript .= '<script src="js/'.$js['name'].'"></script>'.PHP_EOL;
+                $bodyScript .= '<script src="js/'.$js['name'].'" '.$attrs.'></script>'.PHP_EOL;
             }
         }
 
@@ -85,18 +87,20 @@ class JsService
         $headScript = '';
         $bodyScript = '';
         foreach ($dependencies['preload_js'] as $js) {
+            $attrs = implode(' ', $js['attrs']);
             if ($js['is_head']) {
-                $headScript .= '<script src="'.$js['url'].'"></script>'.PHP_EOL;
+                $headScript .= '<script src="'.$js['url'].'" '.$attrs.'></script>'.PHP_EOL;
             } else {
-                $bodyScript .= '<script src="'.$js['url'].'"></script>'.PHP_EOL;
+                $bodyScript .= '<script src="'.$js['url'].'" '.$attrs.'></script>'.PHP_EOL;
             }
         }
 
         foreach ($dependencies['js'] as $js) {
+            $attrs = implode(' ', $js['attrs']);
             if ($js['is_head']) {
-                $headScript .= '<script src="'.$js['url'].'"></script>'.PHP_EOL;
+                $headScript .= '<script src="'.$js['url'].'" '.$attrs.'></script>'.PHP_EOL;
             } else {
-                $bodyScript .= '<script src="'.$js['url'].'"></script>'.PHP_EOL;
+                $bodyScript .= '<script src="'.$js['url'].'" '.$attrs.'></script>'.PHP_EOL;
             }
         }
 
@@ -142,9 +146,11 @@ class JsService
     {
         $jss = [];
         foreach($jssModels as $js) {
+            $attrs = ($js->attrs ?? []) ?: [];
             if ($js->type == 'local') {
                 $jss[] = [
                     'is_head' => $js->is_head,
+                    'attrs' => $attrs,
                     'name' => $js->name,
                     'url' => $this->combineAssets([
                         $js->link
@@ -153,6 +159,7 @@ class JsService
             } else if ($js->type == 'remote') {
                 $jss[] = [
                     'is_head' => $js->is_head,
+                    'attrs' => $attrs,
                     'name' => $js->name,
                     'url' => $js->link
                 ];
@@ -161,6 +168,7 @@ class JsService
                 $type = array_pop($classes);
                 $jss[] = [
                     'is_head' => $js->is_head,
+                    'attrs' => $attrs,
                     'name' => $js->name,
                     'url' => \Url::to('backend/wpjscc/js/index/js/'.$js->identifier.'/'.$type)
                 ];

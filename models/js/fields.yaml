@@ -8,6 +8,12 @@ fields:
         span: auto
         type: taglist
         mode: array
+    attrs:
+        label: attrs
+        span: auto
+        type: taglist
+        mode: array
+        commment: 'script 的一些属性eg: defer'
     is_head:
         label: 是否在head中
         span: auto
