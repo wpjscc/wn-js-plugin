@@ -4,6 +4,10 @@ columns:
         type: text
     tags:
         label: tag
+    identifier:
+        label: 唯一标识符
+        type: text
+        searchable: true
     action:
         label: 操作
         type: partial

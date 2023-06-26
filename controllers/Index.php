@@ -89,7 +89,7 @@ class Index extends Controller
     public function action($identifier, $app = 'JsApp')
     {
         return response(
-            $this->jsService->getAction($identifier),
+            $this->jsService->getAction($identifier, $app),
             200,
             ['Content-Type' => 'text/javascript']
         );

@@ -4,6 +4,10 @@ columns:
         type: text
     type:
         label: type
+    identifier:
+        label: 唯一标识符
+        type: text
+        searchable: true
     tags:
         label: tag
 
